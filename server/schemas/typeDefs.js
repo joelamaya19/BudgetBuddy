@@ -38,8 +38,7 @@ const typeDefs = `
         user(username: String!): User
         transaction(_id: ID): [Transaction]
         categories(_id: ID): [Category]
-        accounts(username: String): [Account] 
-        account(_id: ID): Account
+        account(username: String): [Account] 
         me: User
     }
 

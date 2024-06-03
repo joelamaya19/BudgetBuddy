@@ -12,7 +12,7 @@ const resolvers = {
             return User.findOne({ username }).populate('accounts');
         },
         // Query to get accounts, optionally filtered by username
-        accounts: async (parent, { username }) => {
+        account: async (parent, { username }) => {
             const params = username ? { username } : {};
             return Account.find(params);
         },
