@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const { Transaction } = require('../models');
 
 const categoriesSchema = new Schema({
     name: {
@@ -9,7 +8,10 @@ const categoriesSchema = new Schema({
         maxlength: 25,
         trim: true,
     },
-    transaction: [Transaction]
+    transactions: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Transaction'
+    }]
 });
 
 const Categories = model('Categories', categoriesSchema);

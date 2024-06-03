@@ -19,12 +19,10 @@ const userSchema = new Schema({
         required: true,
         minlength: 8,
     },
-    account: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Account',
-        },
-    ],
+    accounts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Account',
+    }],
 });
 
 userSchema.pre('save', async function (next) {

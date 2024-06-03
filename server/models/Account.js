@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const { Categories, Transaction } = require('../models');
 
 const accountSchema = new Schema({
     name: {
@@ -9,8 +8,19 @@ const accountSchema = new Schema({
         maxlength: 25,
         trim: true,
     },
-    categories: [Categories],
-    transaction: [Transaction]
+    userId : {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    categories: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Categories'
+    }],
+    transactions: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Transaction'
+    }]
 });
 
 const Account = model('Account', accountSchema);

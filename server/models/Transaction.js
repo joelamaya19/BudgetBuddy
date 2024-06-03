@@ -6,7 +6,7 @@ const transactionSchema = new Schema({
         required: 'Account name required!',
         maxlength: 25,
     },
-    value: {
+    amount: {
         type: Number,
         required: 'Enter a value!',
     },
