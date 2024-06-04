@@ -32,15 +32,13 @@ export const ADD_ACCOUNT = gql`
       userId
     }
   }
-`
+`;
+
 export const ADD_CATEGORY = gql`
   mutation addCategory($accountId: ID!, $name: String!, $userId: ID!) {
     addCategory(accountId: $accountId, name: $name, userId: $userId) {
       _id
       name
-      transactions {
-        
-      }
     }
   }
 `;
