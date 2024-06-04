@@ -47,7 +47,7 @@ const typeDefs = `
         login(email: String!, password: String!): Auth
         addTransaction(categoryId: ID!, name: String!, amount: Int!, userId: ID!): Transaction
         addCategory(accountId: ID!, name: String!, userId: ID!): Category
-        addAccount(name: String!, userId: ID!): Account
+        addAccount(name: String!): Account
         removeTransaction(transactionId: ID!): Transaction
         removeCategory(categoryId: ID!): Category 
         removeAccount(accountId: ID!): Account
