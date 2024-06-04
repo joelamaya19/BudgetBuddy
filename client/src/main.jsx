@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Transactions from './pages/Transactions';
+import Categories from './pages/Categories';
+import Accounts from './pages/Accounts';
 
 const router = createBrowserRouter([
   {
@@ -25,6 +27,12 @@ const router = createBrowserRouter([
       }, {
         path: '/transactions',
         element: <Transactions />
+      }, {
+        path: '/categories',
+        element: <Categories />
+      }, {
+        path: '/transactions',
+        element: <Accounts />
       }
     ],
   },
