@@ -15,8 +15,22 @@ query getUser($username: String!) {
   }
 `;
 
+export const QUERY_ME = gql`
+query me {
+  me {
+    _id
+    username
+    email
+    accounts {
+      _id
+      name
+    }
+  }
+}
+`;
+
 export const QUERY_SINGLE_TRANSACTION = gql`
-query Query($id: ID) {
+query getSingleTransaction($id: ID) {
   transaction(_id: $id) {
     _id
     name
@@ -27,7 +41,7 @@ query Query($id: ID) {
 `;
 
 export const QUERY_TRANSACTIONS = gql`
-query Query {
+{
   transaction {
     _id
     name
@@ -38,7 +52,7 @@ query Query {
 `;
 
 export const QUERY_SINGLE_CATEGORIES = gql`
-query Query($id: ID) {
+query getSingleCategories($id: ID) {
   categories(_id: $id) {
     _id
     name
@@ -53,7 +67,7 @@ query Query($id: ID) {
 `;
 
 export const QUERY_CATEGORIES = gql`
-query Query {
+{
   categories {
     _id
     name
@@ -62,7 +76,7 @@ query Query {
 `;
 
 export const QUERY_SINGLE_ACCOUNT = gql`
-query Query($username: String) {
+query getSingleAccount($username: String) {
   account(username: $username) {
     _id
     name
@@ -76,11 +90,10 @@ query Query($username: String) {
 `;
 
 export const QUERY_ACCOUNTS = gql`
-query Query {
+{
   account {
     _id
     name
-    userId
   }
-}
+}  
 `;
