@@ -9,7 +9,7 @@ const CategoryForm = () => {
 
     
 
-    const [formState, setFormState] = useState({ name: '', accountId: ''});
+    const [formState, setFormState] = useState({ name: ''});
     const [addCategory, { error, data }] = useMutation(ADD_CATEGORY);
     const aData = accountData?.account;
 
@@ -49,15 +49,6 @@ const CategoryForm = () => {
                     <h4 className="card-header bg-dark text-light p-2">New Category</h4>
                     <div className="card-body">
                         <form onSubmit={handleFormSubmit}>
-                            <select name="accountId"
-                                onChange={handleChange}>
-                                {aData.map((account) => (
-                                    <option key={account._id} value={account._id}>
-                                        {account.name}
-                                    </option>
-                                ))}
-                                
-                            </select>
                             <input
                                 className="form-input"
                                 placeholder="New Category"

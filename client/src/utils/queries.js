@@ -97,3 +97,17 @@ export const QUERY_ACCOUNTS = gql`
   }
 }  
 `;
+
+export const QUERY_ACCOUNTS_CATEGORIES = gql `
+query Query {
+  account {
+    _id
+    name
+    categories {
+      _id
+      name
+    }
+    userId
+  }
+}
+`

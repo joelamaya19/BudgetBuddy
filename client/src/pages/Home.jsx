@@ -1,16 +1,21 @@
 import { useQuery } from '@apollo/client';
 
 import { QUERY_USER } from '../utils/queries';
+import { QUERY_ACCOUNTS } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const Home = () => {
     const token = Auth.getProfile();
     console.log(token);
-    const { loading, data } = useQuery(QUERY_USER, {
+
+    const { loading, data: accountData } = useQuery(QUERY_ACCOUNTS);
+    const { data } = useQuery(QUERY_USER, {
         variables: { username: token.data.username}
     });
 
     console.log(data);
+    const aData = accountData?.account;
+    console.log(aData, 'account data');
 
     const user = data?.user || [];
 
@@ -28,6 +33,12 @@ const Home = () => {
             >
             {user._id} <br></br>
             {user.username}
+            </div>
+            <div>
+              {aData.map((account) =>(
+                <p key={account._id}>{account.name}</p>
+              )
+              )}
             </div>
           </div>
         </main>
