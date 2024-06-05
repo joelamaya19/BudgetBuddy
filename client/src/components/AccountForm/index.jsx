@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 
 // Queries and Mutations
 import { ADD_ACCOUNT } from "../../utils/mutations";
-import { QUERY_ME, QUERY_SINGLE_ACCOUNT} from "../../utils/queries";
+import { QUERY_ACCOUNTS, QUERY_ME, QUERY_SINGLE_ACCOUNT} from "../../utils/queries";
 
 // Auth
 import Auth from '../../utils/auth';
@@ -11,17 +11,17 @@ import Auth from '../../utils/auth';
 const AccountForm = () => {
     const [name, setName] = useState('');
 
-    useEffect(() => {
-        console.log(name);
-    }, [name]);
+    // useEffect(() => {
+    //     console.log(name);
+    // }, [name]);
 
     const [characterCount, setCharacterCount] = useState(0);
 
     const [addAccount, {error}] = useMutation(
         ADD_ACCOUNT, {
-            // refetchQueries: [
-            //     QUERY_ME, 'me' 
-            // ]
+            refetchQueries: [
+                QUERY_ACCOUNTS 
+            ]
         }
     );
 
@@ -33,7 +33,7 @@ const AccountForm = () => {
             const { data } = await addAccount({
                 variables: { name }
             });
-            console.log(data);
+            // console.log(data);
 
             setName('');
         } catch (err) {
@@ -71,6 +71,7 @@ const AccountForm = () => {
     );
 };
 
+// will be deleted once css has been added
 const styles = {
     container: {
         display: 'flex',

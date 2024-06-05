@@ -12,7 +12,13 @@ const AccountList = ({
         <div>
             {account &&
                 account.map((account) => (
-                    console.log(account) 
+                    <div key={account._id} value="" className=""> 
+                        <h4 className="">
+                            <div>
+                                <p>{account.name}</p>
+                            </div>
+                        </h4>
+                    </div> 
                 ))}
         </div>
     );
