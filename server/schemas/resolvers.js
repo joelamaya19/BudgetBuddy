@@ -14,7 +14,7 @@ const resolvers = {
         // Query to get accounts, optionally filtered by username
         account: async (parent, { username }) => {
             const params = username ? { username } : {};
-            return Account.find(params);
+            return Account.find(params).populate("categories");
         },
         // Query to get categories, optionally filtered by _id
         categories: async (parent, { _id }) => {
@@ -57,10 +57,12 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
         // Mutation to add a new category
-        addCategory: async (parent, { name }, context) => {
+        addCategory: async (parent, { name, accountId }, context) => {
             if (context.user) {
+                console.log(name, accountId)
                 const category = await Categories.create({ name });
-                await Account.findByIdAndUpdate(context.user._id, {
+                console.log(category);
+                await Account.findByIdAndUpdate(accountId, {
                     $push: { categories: category._id },
                 });
                 return category;
