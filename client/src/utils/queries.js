@@ -41,7 +41,7 @@ query getSingleTransaction($id: ID) {
 `;
 
 export const QUERY_TRANSACTIONS = gql`
-query getTransactions {
+{
   transaction {
     _id
     name
@@ -67,7 +67,7 @@ query getSingleCategories($id: ID) {
 `;
 
 export const QUERY_CATEGORIES = gql`
-query getCategories {
+{
   categories {
     _id
     name
@@ -90,11 +90,10 @@ query getSingleAccount($username: String) {
 `;
 
 export const QUERY_ACCOUNTS = gql`
-query getAccounts {
+{
   account {
     _id
     name
-    userId
   }
-}
+}  
 `;
