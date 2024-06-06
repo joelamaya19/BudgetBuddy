@@ -11,8 +11,17 @@ const resolvers = {
         user: async (parent, { username }) => {
             return User.findOne({ username }).populate('accounts');
         },
+        me: async (parent, args, context) => {
+            if (context.user) {
+                return User.findOne({ _id: context.user._id }).populate('accounts').populate({
+                    path: 'accounts', populate: 'categories'
+                });
+            }
+            throw AuthenticationError;
+        },
         // Query to get accounts, optionally filtered by username
         account: async (parent, { username }) => {
+            console.log(username);
             const params = username ? { username } : {};
             return Account.find(params).populate("categories");
         },
@@ -36,7 +45,7 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-         // Mutation to login with existing credentials
+        // Mutation to login with existing credentials
         login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
             if (!user || !(await user.isCorrectPassword(password))) {
@@ -45,8 +54,8 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
-         // Mutation to add a new transaction
-        addTransaction: async (parent, {accountId, categoryId, name, amount }, context) => {
+        // Mutation to add a new transaction
+        addTransaction: async (parent, { accountId, categoryId, name, amount }, context) => {
             if (context.user) {
                 const transaction = await Transaction.create({ name, amount });
                 await Categories.findByIdAndUpdate(categoryId, {
