@@ -46,10 +46,13 @@ const resolvers = {
             return { token, user };
         },
          // Mutation to add a new transaction
-        addTransaction: async (parent, { categoryId, name, amount }, context) => {
+        addTransaction: async (parent, {accountId, categoryId, name, amount }, context) => {
             if (context.user) {
                 const transaction = await Transaction.create({ name, amount });
                 await Categories.findByIdAndUpdate(categoryId, {
+                    $push: { transactions: transaction._id },
+                });
+                await Account.findByIdAndUpdate(accountId, {
                     $push: { transactions: transaction._id },
                 });
                 return transaction;
