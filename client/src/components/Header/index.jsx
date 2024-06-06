@@ -20,9 +20,9 @@ return (
                 {/* if logged in, display profile link and logout button */}
             {auth.loggedIn() ? (
             <>
-              <h1>
+              <h2>
                 Welcome {auth.getProfile().data.username}
-              </h1>
+              </h2>
               <button className="btn logout-btn m-2" onClick={logout}>
                 Logout
               </button>

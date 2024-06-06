@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 
 import { QUERY_USER } from '../utils/queries';
 import { QUERY_ACCOUNTS } from '../utils/queries';
+import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 
 const Home = () => {
@@ -41,7 +42,12 @@ const Home = () => {
         </div>
         <div>
           {aData.map((account) => (
-            <p key={account._id}>{account.name}</p>
+            <div>
+              <p key={account._id}>{account.name}</p>
+              <Link to={`/singleAccount/${account.name}`}>
+                <button>View Account</button>
+              </Link>
+            </div>
           )
           )}
         </div>
