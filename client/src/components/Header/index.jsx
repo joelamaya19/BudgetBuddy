@@ -14,16 +14,15 @@ return (
         <div className= "container">
             <div>
                 <h1>BudgetBuddy</h1>
-                <p>A comprehensive expense tracker that helps you stick to your budget and track where your money is going....</p>
             </div>
             {/* nav element to hold buttons to navigate to other pages */}
             <nav>
                 {/* if logged in, display profile link and logout button */}
             {auth.loggedIn() ? (
             <>
-              <Link className="btn profile-btn m-2" to="/">
-                {auth.getProfile().data.username}'s profile
-              </Link>
+              <h1>
+                Welcome {auth.getProfile().data.username}
+              </h1>
               <button className="btn logout-btn m-2" onClick={logout}>
                 Logout
               </button>
@@ -31,12 +30,16 @@ return (
           ) : (
             // if not logged in, display login/signup buttons to navigate to the respective pages
             <>
-              <Link className="btn login-btn m-2" to="/login">
+            <Link to="/Login">
+            <button className="btn logout-btn m-2" >
                 Login
-              </Link>
-              <Link className="btn signup-btn m-2" to="/signup">
+            </button>
+            </Link>
+            <Link to="/Signup">
+            <button className="btn logout-btn m-2" >
                 Signup
-              </Link>
+            </button>
+            </Link>
             </>
           )}
             </nav>
