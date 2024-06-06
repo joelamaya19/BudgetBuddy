@@ -98,7 +98,7 @@ export const QUERY_ACCOUNTS = gql`
 }  
 `;
 
-export const QUERY_ACCOUNTS_CATEGORIES = gql `
+export const QUERY_ACCOUNTS_CATEGORIES = gql`
 query Query {
   account {
     _id
