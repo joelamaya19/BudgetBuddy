@@ -4,11 +4,12 @@ import { ADD_CATEGORY } from '../../utils/mutations';
 import { ADD_TRANSACTION } from '../../utils/mutations';
 import { QUERY_ACCOUNTS_CATEGORIES } from '../../utils/queries';
 import CategoryForm from '../CategoriesForm';
+import AccountForm from '../AccountForm';
 
 const TransactionForm = () => {
     const { loading, data: categoryData } = useQuery(QUERY_ACCOUNTS_CATEGORIES);
     const [showForm, setShowForm] = useState(false);
-    const [formState, setFormState] = useState({ name: '', accountId: '', amount: ''});
+    const [formState, setFormState] = useState({ name: '', accountId: '', amount: '' });
     const [selectedAccountId, setSelectedAccountId] = useState(null);
     const [selectedCategoryId, setSelectedCategoryId] = useState(null);
     const [addTransaction, { error }] = useMutation(ADD_TRANSACTION);
@@ -17,7 +18,15 @@ const TransactionForm = () => {
 
     // console.log(categoryData);
 
+    // useEffect(() => {
+    //     console.log(formState, 'useeffect')
+    // }, [formState]);
+
     const handleAccountChange = (e) => {
+        if (e.target.value === "showForm") {
+            setShowForm(true);
+        }
+
         setSelectedAccountId(e.target.value);
         setSelectedCategoryId(null);
     };
@@ -50,7 +59,7 @@ const TransactionForm = () => {
                 },
             });
             console.log(data, 'test');
-            setFormState({ name: '', accountId: '', amount: ''});
+            setFormState({ name: '', accountId: '', amount: '' });
         } catch (err) {
             console.error(err);
         }
@@ -67,7 +76,20 @@ const TransactionForm = () => {
                         {acc.name}
                     </option>
                 ))}
+                <option value='showForm'>Add Account</option>
             </select>
+                {/* <div>
+                    {showForm ? (
+                        <div>
+                            <p>TEst</p>
+                            <AccountForm />
+                        </div>
+                    ) : (
+                        <div>
+                            
+                        </div>
+                    )}
+                </div> */}
 
             {selectedAccount && (
                 <div>
