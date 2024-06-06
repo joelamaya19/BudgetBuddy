@@ -9,6 +9,7 @@ import Signup from './pages/Signup';
 import Transactions from './pages/Transactions';
 import Categories from './pages/Categories';
 import Accounts from './pages/Accounts';
+import SingleAccount from './pages/SingleAccount';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,9 @@ const router = createBrowserRouter([
       }, {
         path: '/accounts',
         element: <Accounts />
+      }, {
+        path: '/accounts/:accountId',
+        element: <SingleAccount />
       }
     ],
   },

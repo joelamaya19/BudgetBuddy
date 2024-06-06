@@ -107,7 +107,6 @@ query Query {
       _id
       name
     }
-    userId
   }
 }
 `

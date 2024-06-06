@@ -6,119 +6,100 @@ import { QUERY_ACCOUNTS_CATEGORIES } from '../../utils/queries';
 import CategoryForm from '../CategoriesForm';
 
 const TransactionForm = () => {
-
     const { loading, data: categoryData } = useQuery(QUERY_ACCOUNTS_CATEGORIES);
-
-
     const [showForm, setShowForm] = useState(false);
-
     const [formState, setFormState] = useState({ name: '', accountId: '', amount: '', createdAt: '' });
+    const [selectedAccountId, setSelectedAccountId] = useState(null);
     const [addTransaction, { error, data }] = useMutation(ADD_TRANSACTION);
-    const aData = categoryData?.account;
-    
-    console.log(categoryData, 'catadata')
-    useEffect(() => {
-        console.log(formState)
-    }, [formState]);
-
-    console.log(aData);
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            const { data } = await addTransaction({
-                variables: { ...formState },
-            });
-
-        } catch (e) {
-            console.error(e);
-        }
-
-        
-    };
-
-    const handleChange = async (event) => {
-        const { name, value } = event.target;
-        if (value === 'showForm') {
-            setShowForm(true);
-        }
-        setFormState({
-            ...formState,
-            [name]: value
-        });
-    };
-
+  
     if (loading) return <p>Loading...</p>;
 
+    console.log(categoryData);
+  
+    const handleAccountChange = (e) => {
+      setSelectedAccountId(e.target.value);
+    };
+  
+    const handleFormChange = (e) => {
+      const { name, value } = e.target;
+      setFormState({
+        ...formState,
+        [name]: value,
+      });
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+        await addTransaction({
+          variables: {
+            ...formState,
+            amount: parseFloat(formState.amount),
+          },
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  
+    const selectedAccount = categoryData?.account.find(acc => acc._id === selectedAccountId);
+  
     return (
-        <main className="flex-row justify-center mb-4">
-            <div className="col-12 col-lg-10">
-                <div className="card">
-                    <h4 className="card-header bg-dark text-light p-2">New Category</h4>
-                    <div className="card-body">
-
-                        <select name="accountId"
-                            onChange={handleChange}>
-                            {aData.map((account) => (
-                                <option key={account._id} value={account._id}>
-                                    {account.name}
-                                </option>
-
-                            ))}
-                            <option value='showForm'>
-                                Add Category
-                            </option>
-                        </select>
-                        <div>
-                            {showForm ? (
-                                <div>
-                                    <CategoryForm />
-                                </div>
-                            ) : (
-                                <div>
-                                    this is the input I want
-                                </div>
-                            )}
-                            <div>
-                                <form onSubmit={handleFormSubmit}>
-                                    <input
-                                        className="form-input"
-                                        placeholder="Transaction name..."
-                                        name="name"
-                                        type="text"
-                                        value={formState.name}
-                                        onChange={handleChange}
-                                    />
-                                    <input
-                                        className="form-input"
-                                        placeholder="Transaction amount"
-                                        name="amount"
-                                        type="text"
-                                        value={formState.amount}
-                                        onChange={handleChange}
-                                    />
-
-                                    <button
-                                        className="btn btn-block btn-primary"
-                                        style={{ cursor: 'pointer' }}
-                                        type="submit"
-                                    >
-                                        Submit
-                                    </button>
-                                </form>
-                            </div>
-
-                            {error && (
-                                <div className="my-3 p-3 bg-danger text-white">
-                                    {error.message}
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+      <div>
+        <select onChange={handleAccountChange} value={selectedAccountId || ''}>
+          <option value="" disabled>Select an account</option>
+          {categoryData?.account.map(acc => (
+            <option key={acc._id} value={acc._id}>
+              {acc.name}
+            </option>
+          ))}
+        </select>
+  
+        {selectedAccount && (
+          <div>
+            <h3>Categories for {selectedAccount.name}</h3>
+            <ul>
+              {selectedAccount.categories.map(cat => (
+                <li key={cat._id}>{cat.name}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+  
+        <button onClick={() => setShowForm(!showForm)}>
+          {showForm ? 'Hide Form' : 'Show Form'}
+        </button>
+  
+        {showForm && (
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Transaction Name"
+              value={formState.name}
+              onChange={handleFormChange}
+            />
+            <input
+              type="text"
+              name="amount"
+              placeholder="Amount"
+              value={formState.amount}
+              onChange={handleFormChange}
+            />
+            <input
+              type="date"
+              name="createdAt"
+              placeholder="Created At"
+              value={formState.createdAt}
+              onChange={handleFormChange}
+            />
+            <button type="submit">Add Transaction</button>
+          </form>
+        )}
+  
+        {error && <p>Error: {error.message}</p>}
+      </div>
     );
-};
-
-export default TransactionForm;
+  };
+  
+  export default TransactionForm;

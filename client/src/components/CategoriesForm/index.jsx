@@ -26,6 +26,7 @@ const CategoryForm = () => {
                 variables: { ...formState },
             });
 
+            setFormState({name: ''});
         } catch (e) {
             console.error(e);
         }
