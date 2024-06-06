@@ -16,14 +16,18 @@ query getUser($username: String!) {
 `;
 
 export const QUERY_ME = gql`
-query me {
+query Me {
   me {
     _id
-    username
     email
+    username
     accounts {
       _id
       name
+      categories {
+        _id
+        name
+      }
     }
   }
 }
