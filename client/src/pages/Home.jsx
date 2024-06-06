@@ -41,9 +41,10 @@ const Home = () => {
           {user.username}
         </div>
         <div>
+
           {aData.map((account) => (
-            <div>
-              <p key={account._id}>{account.name}</p>
+            <div key={account._id}>
+              <p>{account.name}</p>
               <Link to={`/singleAccount/${account.name}`}>
                 <button>View Account</button>
               </Link>
