@@ -35,8 +35,8 @@ const router = createBrowserRouter([
         path: '/accounts',
         element: <Accounts />
       }, {
-        path: '/accounts/:accountId',
-        element: <SingleAccount />
+        path: '/singleAccount/:accountName',
+        element: <SingleAccount/>
       }
     ],
   },
