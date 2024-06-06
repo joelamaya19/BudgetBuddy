@@ -9,7 +9,7 @@ import Signup from './pages/Signup';
 import Transactions from './pages/Transactions';
 import Categories from './pages/Categories';
 import Accounts from './pages/Accounts';
-import SingleAccount from './pages/SingleAccount';
+import SingleAccount from './pages/singleAccount.jsx';
 
 const router = createBrowserRouter([
   {
