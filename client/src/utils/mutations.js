@@ -44,9 +44,10 @@ export const ADD_CATEGORY = gql`
 `;
 
 export const ADD_TRANSACTION = gql`
-  mutation addTransaction($categoryId: ID!, $name: String!, $amount: Int!) {
-    addTransaction(categoryId: $categoryId, name: $name, amount: $amount) {
+  mutation addTransaction($accountId: ID!, $categoryName: String!, $name: String!, $amount: Int!) {
+    addTransaction(accountId: $accountId, categoryName: $categoryName, name: $name, amount: $amount) {
       _id
+      categoryName
       amount
       createdAt
       name
