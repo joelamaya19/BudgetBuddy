@@ -60,6 +60,15 @@ li{
   padding: 0;
 }
 
+.accountInfo{
+  display: flex;
+}
+
+.categories, .transactions{
+  flex: 1 0 50%;
+  max-width: 50%;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
