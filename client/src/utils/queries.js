@@ -80,14 +80,20 @@ export const QUERY_CATEGORIES = gql`
 `;
 
 export const QUERY_SINGLE_ACCOUNT = gql`
-query getSingleAccount($username: String) {
-  account(username: $username) {
+query Query {
+  account {
     _id
     name
     userId
     categories {
       _id
-      name
+      name   
+      transactions {
+        _id
+        amount
+        createdAt
+        name
+      }
     }
   }
 }

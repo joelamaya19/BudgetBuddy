@@ -23,12 +23,14 @@ const resolvers = {
         account: async (parent, { username }) => {
             console.log(username);
             const params = username ? { username } : {};
-            return Account.find(params).populate("categories");
+            return Account.find(params).populate("categories").populate({
+                path: 'categories', populate: 'transactions'
+            });
         },
         // Query to get categories, optionally filtered by _id
         categories: async (parent, { _id }) => {
             const params = _id ? { _id } : {};
-            return Categories.find(params);
+            return Categories.find(params).populate("transactions");
         },
         // Query to get transactions, optionally filtered by _id
         transaction: async (parent, { _id }) => {

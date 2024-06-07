@@ -14,8 +14,8 @@ const typeDefs = `
 
     type Transaction {
         _id: ID!
-        name: String!
-        amount: Int!
+        name: String
+        amount: Int
         createdAt: String
     }
 
