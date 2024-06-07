@@ -18,6 +18,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -57,6 +58,10 @@ button:focus-visible {
 li{
   list-style-type: none;
   margin: 0;
+  padding: 0;
+}
+
+ul {
   padding: 0;
 }
 
