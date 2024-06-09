@@ -9,7 +9,9 @@ const resolvers = {
         },
         // Query to get a specific user by username with their associated accounts
         user: async (parent, { username }) => {
-            return User.findOne({ username }).populate('accounts');
+            return User.findOne({ username }).populate('accounts').populate({
+                path: 'accounts'
+            });
         },
         me: async (parent, args, context) => {
             if (context.user) {
@@ -86,7 +88,9 @@ const resolvers = {
         // Mutation to add a new account
         addAccount: async (parent, { name }, context) => {
             if (context.user) {
-                const account = await Account.create({ name, userId: context.user._id });
+                console.log(name);
+                const account = await Account.create({ name });
+                console.log(account);
                 await User.findByIdAndUpdate(context.user._id, {
                     $push: { accounts: account._id },
                 });

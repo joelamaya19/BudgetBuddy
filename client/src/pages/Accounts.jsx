@@ -10,14 +10,14 @@ import Auth from '../utils/auth';
 
 const Accounts = () => {
     const token = Auth.getProfile();
-
+    
     console.log(token);
 
-    const { loading, data } = useQuery(QUERY_ACCOUNTS, {
+    const { loading, data } = useQuery(QUERY_ME, {
         variables: { name: token.data.name }
     });
-
-    const account = data?.account || [];
+    console.log(data);
+    const account = data?.me.accounts || [];
 
     console.log(account);
 

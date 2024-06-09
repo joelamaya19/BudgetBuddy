@@ -1,18 +1,25 @@
 import { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_CATEGORY } from '../../utils/mutations';
-import { QUERY_ACCOUNTS } from '../../utils/queries';
+import { QUERY_ME } from '../../utils/queries';
 
 const CategoryForm = () => {
 
-    const { loading, data: accountData } = useQuery(QUERY_ACCOUNTS);
+    const { loading, data: accountData } = useQuery(QUERY_ME);
 
     
 
     const [formState, setFormState] = useState({ name: '', accountId: ''});
-    const [addCategory, { error, data }] = useMutation(ADD_CATEGORY);
-    const aData = accountData?.account;
-
+    const [addCategory, { error, data }] = useMutation(
+        ADD_CATEGORY, {
+            refetchQueries: [
+                QUERY_ME
+            ]
+        }
+    );
+    const aData = accountData?.me.accounts;
+    console.log(accountData)
+    
     useEffect(() => {
         console.log(formState)
     },[formState]);

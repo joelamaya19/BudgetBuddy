@@ -8,7 +8,6 @@ query getUser($username: String!) {
       username
       accounts {
         name
-        userId
         _id
       }
     }

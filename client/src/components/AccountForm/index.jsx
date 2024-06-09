@@ -20,7 +20,7 @@ const AccountForm = () => {
     const [addAccount, {error}] = useMutation(
         ADD_ACCOUNT, {
             refetchQueries: [
-                QUERY_ACCOUNTS 
+                QUERY_ME
             ]
         }
     );
@@ -28,10 +28,11 @@ const AccountForm = () => {
     // On submit account is added.
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-
+        console.log(name);
         try {
+            
             const { data } = await addAccount({
-                variables: { name }
+                variables: {name: name,},
             });
             // console.log(data);
 

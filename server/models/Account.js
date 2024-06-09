@@ -8,11 +8,6 @@ const accountSchema = new Schema({
         maxlength: 25,
         trim: true,
     },
-    userId : {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
     categories: [{
         type: Schema.Types.ObjectId,
         ref: 'Categories'
