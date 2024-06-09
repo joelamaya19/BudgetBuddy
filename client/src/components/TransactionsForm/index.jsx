@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_CATEGORY } from '../../utils/mutations';
 import { ADD_TRANSACTION } from '../../utils/mutations';
-import { QUERY_ACCOUNTS_CATEGORIES } from '../../utils/queries';
+import { QUERY_ACCOUNTS_CATEGORIES, QUERY_ME, QUERY_SINGLE_ACCOUNT } from '../../utils/queries';
 import CategoryForm from '../CategoriesForm';
 import AccountForm from '../AccountForm';
 
@@ -12,7 +12,12 @@ const TransactionForm = () => {
     const [formState, setFormState] = useState({ name: '', accountId: '', amount: '' });
     const [selectedAccountId, setSelectedAccountId] = useState(null);
     const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-    const [addTransaction, { error }] = useMutation(ADD_TRANSACTION);
+    const [addTransaction, { error }] = useMutation(
+        ADD_TRANSACTION, {
+            refetchQueries: [
+                QUERY_SINGLE_ACCOUNT
+            ]
+        });
 
     if (loading) return <p>Loading...</p>;
 

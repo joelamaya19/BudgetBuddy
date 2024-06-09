@@ -2,9 +2,9 @@ import { Navigate } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
 import { QUERY_USER } from '../utils/queries';
-import { QUERY_ACCOUNTS } from '../utils/queries';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
+import AccountModal from '../components/accountModal';
 
 const Home = () => {
   if (!Auth.loggedIn()) {
@@ -12,24 +12,36 @@ const Home = () => {
   }
 
   const token = Auth.getProfile();
-  console.log(token);
 
-  const { loading, data: accountData } = useQuery(QUERY_ACCOUNTS);
-  const { data } = useQuery(QUERY_USER, {
+
+  const { loading, data } = useQuery(QUERY_USER, {
     variables: { username: token.data.username }
   });
 
-  console.log(data);
-  const aData = accountData?.account;
+  console.log(data, 'data');
+  const user = data?.user || [];
+  const aData = data?.user.accounts;
   console.log(aData, 'account data');
 
-  const user = data?.user || [];
-
+ 
+  console.log(user, 'user')
   if (loading) {
     return (
       <div>Loading...</div>
     );
   }
+
+  if(aData.length == 0) {
+    return (
+      <div>
+        <div>
+          No accounts found.
+        </div>
+        <AccountModal/>
+      </div>
+    )
+  }
+
   return (
     <main>
       <div className="flex-row justify-center">

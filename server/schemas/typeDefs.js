@@ -28,7 +28,6 @@ const typeDefs = `
     type Account {
         _id: ID!
         name: String!
-        userId: ID!
         categories: [Category]
         transactions: [Transaction]
     }

@@ -29,7 +29,6 @@ export const ADD_ACCOUNT = gql`
     addAccount(name: $name) {
       _id
       name
-      userId
     }
   }
 `;

@@ -6,7 +6,7 @@ import CategoryList from '../components/CategoriesList';
 
 const Categories = () => {
     const token = Auth.getProfile();
-
+    
     const {loading, data } = useQuery(QUERY_CATEGORIES, {
         variables: {name: token.data.name}
     });

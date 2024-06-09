@@ -6,10 +6,11 @@ import TransactionModal from '../components/transactionModal';
 
 import { QUERY_ME, QUERY_SINGLE_ACCOUNT } from '../utils/queries';
 import Auth from '../utils/auth';
+import CategoryModal from '../components/categoryModal';
 
 const SingleAccount = () => {
     const userInfo = Auth.getProfile();
-
+    
     const { accountName } = useParams();
 
     console.log(userInfo);
@@ -32,7 +33,9 @@ const SingleAccount = () => {
                 <Link to={`/`}>
                     <button>Home</button>
                 </Link>
+                <CategoryModal/>
                 <TransactionModal />
+                
             </div>
 
             <div>
@@ -48,7 +51,7 @@ const SingleAccount = () => {
                                                 <div>
                                                     {category.transactions && category.transactions.map((transaction) => {
                                                         return (
-                                                            <div key={transaction._id}>{transaction.name} </div>
+                                                            <div key={transaction._id}>{transaction.name} : {transaction.amount}</div>
                                                         )
                                                     }
                                                     )}
