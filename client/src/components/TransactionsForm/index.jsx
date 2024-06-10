@@ -132,7 +132,7 @@ const TransactionForm = () => {
                     value={formState.createdAt}
                     onChange={handleFormChange}
                 /> */}
-                    <button type="submit">Add Transaction</button>
+                    <button className="btn btn-block btn-primary" type="submit">Add Transaction</button>
                 </form>
             )}
         </div>

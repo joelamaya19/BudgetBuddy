@@ -34,12 +34,10 @@ const Home = () => {
 
   if(aData.length == 0) {
     return (
-      <div>
-        <div>
-          No accounts found.
+        <div className='homeContainer'>
+          <h3>No accounts found.</h3>
+          <AccountModal/>
         </div>
-        <AccountModal/>
-      </div>
     )
   }
 

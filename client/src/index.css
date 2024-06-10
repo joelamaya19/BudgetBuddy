@@ -90,11 +90,11 @@ button:focus-visible {
 }
 
 .filler{
-  width: 180.12px;
+  width: 180.14px;
 }
 
 .loggedFiller{
-width: 158.46px;
+color: transparent;
 }
 
 .loggedNav{

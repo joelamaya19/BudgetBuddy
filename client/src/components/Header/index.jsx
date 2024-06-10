@@ -12,9 +12,9 @@ const logout = (event) => {
 return (
     <header>
       {auth.loggedIn() ? (
-        <p className='loggedFiller'></p>
+        <h4 className='loggedFiller'>Welcome, {auth.getProfile().data.username}</h4>
         
-      ):(<p className='filler'></p>)}
+      ):(<h4 className='filler'></h4>)}
       
             <h1>BudgetBuddy</h1>
             
