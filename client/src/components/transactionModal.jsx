@@ -10,7 +10,7 @@ function TransactionModal() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button class="btn btn-primary" className="accBtn" onClick={handleShow}>
         Add Transaction
       </Button>
 
@@ -24,9 +24,6 @@ function TransactionModal() {
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>

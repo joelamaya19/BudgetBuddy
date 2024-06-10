@@ -10,7 +10,7 @@ function AccountModal() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" className='newAccBtn' onClick={handleShow}>
         New Account
       </Button>
 

@@ -10,13 +10,13 @@ function CategoryModal() {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button class="btn btn-primary" className="accBtn" onClick={handleShow}>
         New Category
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>
-          <Modal.Title>Add Category</Modal.Title>
+          <Modal.Title >Add Category</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <CategoryForm/>

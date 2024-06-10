@@ -5,7 +5,8 @@ import { QUERY_USER } from '../utils/queries';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
 import AccountModal from '../components/accountModal';
-
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 const Home = () => {
   if (!Auth.loggedIn()) {
     return <Navigate to="/login" />;
@@ -43,28 +44,28 @@ const Home = () => {
   }
 
   return (
-    <main>
-      <div className="flex-row justify-center">
-        <div
-          className="col-12 col-md-10 mb-3 p-3"
-          style={{ border: '1px dotted #1a1a1a' }}
-        >
-          {user._id} <br></br>
-          {user.username}
-        </div>
+    <main className='homeContainer'>
+      
+        <h3>
+          {user.username}'s Accounts:
+        </h3>
         <div>
-
+        
           {aData.map((account) => (
-            <div key={account._id}>
-              <p>{account.name}</p>
+            <Card className='accountCard' key={account._id}>
+              <Card.Body>
+                <Card.Title>{account.name}</Card.Title>
+                <Card.Text>Balance: $ {account.balance}</Card.Text>
               <Link to={`/singleAccount/${account.name}`}>
-                <button>View Account</button>
+                <Button variant="secondary">View Account</Button>
               </Link>
-            </div>
+              </Card.Body>
+            </Card>
           )
           )}
+          <AccountModal />
         </div>
-      </div>
+      
     </main>
   );
 };
