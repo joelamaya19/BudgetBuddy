@@ -7,10 +7,12 @@ import TransactionModal from '../components/transactionModal';
 import { QUERY_ME, QUERY_SINGLE_ACCOUNT } from '../utils/queries';
 import Auth from '../utils/auth';
 import CategoryModal from '../components/categoryModal';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 
 const SingleAccount = () => {
     const userInfo = Auth.getProfile();
-    
+
     const { accountName } = useParams();
 
     console.log(userInfo);
@@ -19,7 +21,6 @@ const SingleAccount = () => {
 
 
     const accounts = data?.account || [];
-
     console.log(accounts, 'accounts')
 
     if (loading) {
@@ -28,49 +29,71 @@ const SingleAccount = () => {
         );
     }
     return (
-        <div>
+        <div className='singleAccContainer'>
             <div>
                 <Link to={`/`}>
-                    <button>Home</button>
+                    <button class="btn btn-primary accBtn">Home</button>
                 </Link>
-                <CategoryModal/>
+                <CategoryModal />
                 <TransactionModal />
-                
+
             </div>
 
-            <div>
+            <div classname='categoryCard'>
                 <div> {accounts && accounts.map((account) => {
                     if (account.name === accountName) {
+                        if (account.categories.length === 0) {
+                            return (
+                                <Card style={{ marginBottom: '10px', marginTop: '10px', width: '18rem', textAlign: 'center' }}>
+                                    <Card.Title>
+                                        No categories to display.
+                                    </Card.Title>
+                                </Card>
+                            )
+                        }
                         return (
-                            <div key={account._id} className="accountInfo">
-                                <div className="categories">
-                                    <div>{account.categories && account.categories.map((category) => {
+                            <Card border='info' style={{ marginBottom: '10px', marginTop: '10px', width: '20rem', textAlign: 'center' }} key={account._id}>
+                                <Card.Title>Account Information</Card.Title>
+                                {account.categories && account.categories.map((category) => {
+                                    if (category.transactions.length === 0) {
                                         return (
-                                            <div key={category._id}>
-                                                <div >{category.name}</div>
-                                                <div>
-                                                    {category.transactions && category.transactions.map((transaction) => {
-                                                        return (
-                                                            <div key={transaction._id}>{transaction.name} : {transaction.amount}</div>
-                                                        )
-                                                    }
-                                                    )}
-                                                </div>
-                                            </div>
+                                            <Card border='info' style={{ margin: '10px' }} key={category._id}>
+                                                <Card.Title >Category: {category.name} <br></br>
+                                                    Balance: $<br></br>
+                                                    Transactions:
+                                                </Card.Title>
+                                                <div>No transactions to display.</div>
+                                            </Card>
                                         )
-                                    })}</div>
-                                </div>
+                                    }
+                                    return (
+                                        <Card border='info' style={{ margin: '10px' }} key={category._id}>
+                                            <Card.Title >Category: {category.name} <br></br>
+                                                Balance: $<br></br>
+                                                Transactions:
+                                            </Card.Title>
 
-                            </div>
+                                            {category.transactions.map((transaction) => {
+
+                                                return (
+                                                    <div key={transaction._id}>
+                                                        <div>{transaction.name}: ${transaction.amount}</div>
+                                                    </div>
+                                                )
+
+
+                                            }
+                                            )}
+                                        </Card>
+                                    )
+                                })}
+                            </Card>
                         );
                     }
-                    return null;
                 })}
                 </div>
-
             </div>
         </div>
-
     );
 };
 

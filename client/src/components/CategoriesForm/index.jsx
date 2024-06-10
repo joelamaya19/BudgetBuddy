@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { ADD_CATEGORY } from '../../utils/mutations';
-import { QUERY_ME } from '../../utils/queries';
+import { QUERY_ME, QUERY_SINGLE_ACCOUNT} from '../../utils/queries';
 
 const CategoryForm = () => {
 
@@ -13,7 +13,7 @@ const CategoryForm = () => {
     const [addCategory, { error, data }] = useMutation(
         ADD_CATEGORY, {
             refetchQueries: [
-                QUERY_ME
+                QUERY_SINGLE_ACCOUNT
             ]
         }
     );
@@ -59,6 +59,7 @@ const CategoryForm = () => {
                         <form onSubmit={handleFormSubmit}>
                             <select name="accountId"
                                 onChange={handleChange}>
+                                    <option value="">Select Account</option>
                                 {aData.map((account) => (
                                     <option key={account._id} value={account._id}>
                                         {account.name}

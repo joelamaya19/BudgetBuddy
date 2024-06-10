@@ -41,10 +41,10 @@ const Login = (props) => {
   };
 
   return (
-    <main className="flex-row justify-center mb-4">
-      <div className="col-12 col-lg-10">
+    <main className="signupContainer">
+      <div className="signupCard">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Login</h4>
+          <h4 className="card-header bg-dark text-light text-center p-2">Login</h4>
           <div className="card-body">
             {data ? (
               <p>
@@ -53,7 +53,7 @@ const Login = (props) => {
               </p>
             ) : (
             <div>
-              <form onSubmit={handleFormSubmit}>
+              <form className='signupForm' onSubmit={handleFormSubmit}>
                 <input
                   className="form-input"
                   placeholder="Your email"
@@ -80,7 +80,7 @@ const Login = (props) => {
               </form>
 
               <div>
-                <p>New here? Make an <Link to="/Signup">account</Link></p>
+                <p className='text-center'>New here? Make an <Link to="/Signup">account</Link></p>
               </div>
             </div>
             )}

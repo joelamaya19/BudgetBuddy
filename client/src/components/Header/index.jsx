@@ -10,40 +10,43 @@ const logout = (event) => {
 };
 
 return (
-    <header className= "flex-row align-center">
-        <div className= "container">
-            <div>
-                <h1>BudgetBuddy</h1>
-            </div>
+    <header>
+      {auth.loggedIn() ? (
+        <h4 className='loggedFiller'>Welcome, {auth.getProfile().data.username}</h4>
+        
+      ):(<h4 className='filler'></h4>)}
+      
+            <h1>BudgetBuddy</h1>
+            
             {/* nav element to hold buttons to navigate to other pages */}
             <nav>
                 {/* if logged in, display profile link and logout button */}
             {auth.loggedIn() ? (
-            <>
-              <h2>
-                Welcome {auth.getProfile().data.username}
-              </h2>
-              <button className="btn logout-btn m-2" onClick={logout}>
+            <div className='loggedNav'>
+              <h4>
+                Welcome, {auth.getProfile().data.username}
+              </h4>
+              <button onClick={logout}>
                 Logout
               </button>
-            </>
+            </div>
           ) : (
             // if not logged in, display login/signup buttons to navigate to the respective pages
             <>
             <Link to="/Login">
-            <button className="btn logout-btn m-2" >
+            <button  >
                 Login
             </button>
             </Link>
             <Link to="/Signup">
-            <button className="btn logout-btn m-2" >
+            <button >
                 Signup
             </button>
             </Link>
             </>
           )}
             </nav>
-        </div>
+        
     </header>
 )
 };

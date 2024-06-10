@@ -7,7 +7,7 @@ import CategoryForm from '../CategoriesForm';
 import AccountForm from '../AccountForm';
 
 const TransactionForm = () => {
-    const { loading, data: categoryData } = useQuery(QUERY_ACCOUNTS_CATEGORIES);
+    const { loading, data: categoryData } = useQuery(QUERY_ME);
     const [showForm, setShowForm] = useState(false);
     const [formState, setFormState] = useState({ name: '', accountId: '', amount: '' });
     const [selectedAccountId, setSelectedAccountId] = useState(null);
@@ -70,13 +70,13 @@ const TransactionForm = () => {
         }
     };
 
-    const selectedAccount = categoryData?.account.find(acc => acc._id === selectedAccountId);
+    const selectedAccount = categoryData?.me.accounts.find(acc => acc._id === selectedAccountId);
 
     return (
         <div>
             <select onChange={handleAccountChange} value={selectedAccountId || ''}>
                 <option value="" disabled>Select an account</option>
-                {categoryData?.account.map(acc => (
+                {categoryData?.me.accounts.map(acc => (
                     <option key={acc._id} value={acc._id}>
                         {acc.name}
                     </option>
@@ -132,7 +132,7 @@ const TransactionForm = () => {
                     value={formState.createdAt}
                     onChange={handleFormChange}
                 /> */}
-                    <button type="submit">Add Transaction</button>
+                    <button className="btn btn-block btn-primary" type="submit">Add Transaction</button>
                 </form>
             )}
         </div>

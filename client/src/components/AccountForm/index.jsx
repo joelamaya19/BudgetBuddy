@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 
 // Queries and Mutations
 import { ADD_ACCOUNT } from "../../utils/mutations";
-import { QUERY_ACCOUNTS, QUERY_ME, QUERY_SINGLE_ACCOUNT} from "../../utils/queries";
+import { QUERY_ACCOUNTS, QUERY_USER, QUERY_SINGLE_ACCOUNT} from "../../utils/queries";
 
 // Auth
 import Auth from '../../utils/auth';
@@ -20,7 +20,7 @@ const AccountForm = () => {
     const [addAccount, {error}] = useMutation(
         ADD_ACCOUNT, {
             refetchQueries: [
-                QUERY_ME
+                QUERY_USER
             ]
         }
     );
@@ -32,7 +32,7 @@ const AccountForm = () => {
         try {
             
             const { data } = await addAccount({
-                variables: {name: name,},
+                variables: {name: name},
             });
             // console.log(data);
 

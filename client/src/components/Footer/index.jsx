@@ -1,18 +1,13 @@
 const Footer = () => {
     return (
         <footer>
-            <div className="container">
+            <div>
                 <h4>
                     Made by the Three Musketeers.
                 </h4>
-                <div>
+                
                     <p className='contact'>Contact Us:</p>
-                    <ul className='social-links'>
-                        <li>
-                            <a className="gabi" href="https://github.com/NotSnowWhite">
-                                Gabi Latch
-                            </a>
-                        </li>
+                    <ul className='socials'>
                         <li>
                             <a className="kyle" href="https://github.com/KyleH-Git">
                                 Kyle Hayden
@@ -23,9 +18,14 @@ const Footer = () => {
                                 Joel Amaya
                             </a>
                         </li>
+                        <li>
+                            <a className="gabi" href="https://github.com/NotSnowWhite">
+                                Gabi Latch
+                            </a>
+                        </li>
                     </ul>
 
-                </div>
+                
 
             </div>
         </footer>

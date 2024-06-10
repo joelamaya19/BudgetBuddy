@@ -83,7 +83,6 @@ query Query {
   account {
     _id
     name
-    userId
     categories {
       _id
       name   
